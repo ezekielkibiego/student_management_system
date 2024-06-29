@@ -1,17 +1,17 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
-{% block title %}
-    Home
-{% endblock %}
+{% block title %}Student List{% endblock %}
 
 {% block content %}
-    <!-- content specific to child template -->
-    <div class="container mx-auto">
-        <div class="grid grid-cols-2 gap-4">
-            <div>
-                <h1 class="mt-5 mb-5 text-4xl font-bold text-red-500">Hello</h1>
-            </div>
-        
-        </div>
-    </div>
+<h1>Student List</h1>
+<a href="{% url 'add_student' %}">Add New Student</a>
+<ul>
+    {% for student in students %}
+        <li>
+            <a href="{% url 'student_detail' student.pk %}">{{ student.first_name }} {{ student.last_name }}</a>
+            (<a href="{% url 'student_update' student.pk %}">Edit</a>, 
+            <a href="{% url 'student_delete' student.pk %}">Delete</a>)
+        </li>
+    {% endfor %}
+</ul>
 {% endblock %}
